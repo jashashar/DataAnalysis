@@ -1,0 +1,238 @@
+{
+  "id": "22|ECOMMERCE|PERFORMANCE|DASHBOARD",
+  "brandId": "22",
+  "name": "Quick Commerce",
+  "logo": "/icons/eshop.svg",
+  "description": "Track key e-commerce metrics for better insights",
+  "active": true,
+  "cards": [
+    {
+      "visualizationType": "linechart",
+      "title": "Revenue Trend",
+      "id": "eshop-revenue-trend",
+      "logo": "/icons/revenue.svg",
+      "description": "Monthly revenue performance",
+      "gridStackProperties": {
+        "x": 0.0,
+        "w": 4.0
+      },
+      "query": {
+        "timeDimensions": [
+          {
+            "dimension": "orders.created_at",
+            "granularity": "year"
+          }
+        ],
+        "dimensions": [],
+        "filters": [
+          {
+            "values": [
+              "35"
+            ],
+            "member": "orders.users_age",
+            "operator": "lt"
+          },
+          {
+            "values": [
+              "completed"
+            ],
+            "member": "orders.status",
+            "operator": "equals"
+          }
+        ],
+        "measures": [
+          "orders.count"
+        ]
+      },
+      "datatableProperties": {
+        "columnOrder": [],
+        "columnsPinned": [],
+        "columnsVisible": {}
+      },
+      "active": true
+    },
+    {
+      "visualizationType": "linechart",
+      "title": "Units Sold",
+      "id": "eshop-units-sold",
+      "logo": "/icons/units.svg",
+      "description": "Track sold units over time",
+      "gridStackProperties": {
+        "x": 8.0,
+        "w": 4.0
+      },
+      "query": {
+        "timeDimensions": [
+          {
+            "dimension": "orders.created_at",
+            "granularity": "month",
+            "dateRange": "last year"
+          }
+        ],
+        "measures": [
+          "orders.mau"
+        ]
+      },
+      "datatableProperties": {
+        "columnOrder": [],
+        "columnsPinned": [],
+        "columnsVisible": {}
+      },
+      "active": true
+    },
+    {
+      "visualizationType": "semipiechart",
+      "title": "Top Categories",
+      "id": "eshop-top-categories",
+      "logo": "/icons/category.svg",
+      "description": "Most profitable product categories",
+      "gridStackProperties": {
+        "x": 4.0,
+        "w": 4.0
+      },
+      "query": {
+        "measures": [
+          "orders.total"
+        ],
+        "dimensions": [
+          "orders.users_city"
+        ],
+        "filters": [
+          {
+            "values": [
+              "500"
+            ],
+            "member": "orders.total",
+            "operator": "gt"
+          }
+        ]
+      },
+      "datatableProperties": {
+        "columnOrder": [
+          "eshop_sales.category_revenue"
+        ],
+        "columnsPinned": [],
+        "columnsVisible": {
+          "eshop_sales.category_revenue": true
+        }
+      },
+      "active": true
+    },
+    {
+      "visualizationType": "table",
+      "title": "Product Insights",
+      "id": "eshop-product-insights",
+      "logo": "/icons/product.svg",
+      "description": "Detailed analytics of individual products",
+      "gridStackProperties": {
+        "x": 0.0,
+        "w": 12.0
+      },
+      "query": {
+        "dimensions": [
+          "orders.users_city"
+        ],
+        "measures": [
+          "orders.dau",
+          "orders.wau",
+          "orders.mau",
+          "orders.total",
+          "orders.completed_count"
+        ],
+        "filters": [
+          {
+            "values": [
+              "500"
+            ],
+            "member": "orders.total",
+            "operator": "gt"
+          }
+        ]
+      },
+      "datatableProperties": {
+        "columnOrder": [
+          "eshop_sales.product_name",
+          "eshop_sales.revenue",
+          "eshop_sales.units_sold",
+          "eshop_sales.profit_margin"
+        ],
+        "columnsPinned": [
+          "selection-checkbox",
+          "eshop_sales.product_name"
+        ],
+        "columnsVisible": {
+          "eshop_sales.revenue": true,
+          "eshop_sales.units_sold": true,
+          "eshop_sales.profit_margin": true,
+          "eshop_sales.product_name": true
+        }
+      },
+      "active": true
+    },
+    {
+      "visualizationType": "table",
+      "title": "Regional Sales",
+      "id": "eshop-regional-sales",
+      "logo": "/icons/region.svg",
+      "description": "Sales breakdown by region",
+      "gridStackProperties": {
+        "x": 0.0,
+        "w": 12.0
+      },
+      "query":{
+        "dimensions": [
+          "orders.users_age",
+          "orders.users_city"
+        ],
+        "measures": [
+          "orders.count",
+          "orders.completed_count"
+        ],
+        "filters": [
+          {
+            "and": [
+              {
+                "values": [
+                  "50"
+                ],
+                "member": "orders.users_age",
+                "operator": "lt"
+              },
+              {
+                "values": [
+                  "45"
+                ],
+                "member": "orders.users_age",
+                "operator": "gt"
+              }
+            ]
+          },
+          {
+            "values": [
+              "35"
+            ],
+            "member": "orders.count",
+            "operator": "gt"
+          }
+        ]
+      },
+      "datatableProperties": {
+        "columnOrder": [
+          "eshop_sales.region",
+          "eshop_sales.region_revenue",
+          "eshop_sales.region_units_sold"
+        ],
+        "columnsPinned": [
+          "selection-checkbox",
+          "eshop_sales.region"
+        ],
+        "columnsVisible": {
+          "eshop_sales.region": true,
+          "eshop_sales.region_revenue": true,
+          "eshop_sales.region_units_sold": true
+        }
+      },
+      "active": true
+    }
+  ]
+}

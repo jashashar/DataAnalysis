@@ -1,6 +1,6 @@
 import React from "react";
 import Dashboard from "./components/Dashboard";
-import Sidebar from "./components/sidebar";
+import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import data from './data/data.json';
 
